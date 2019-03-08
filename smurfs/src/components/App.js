@@ -1,22 +1,31 @@
-import React, { Component } from 'react';
-import './App.css';
-/*
- to wire this component up you're going to need a few things.
- I'll let you do this part on your own. 
- Just remember, `how do I `connect` my components to redux?`
- `How do I ensure that my component links the state to props?`
- */
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
+import React, { useEffect } from "react"
+import { connect } from "react-redux"
+
+import SmurfsList from "./SmurfsList"
+import SmurfForm from "./SmurfForm"
+import { fetchSmurfsFrom } from "../actionCreators"
+
+import "./App.css"
+
+const API_ENDPOINT = "http://10.0.0.53:3333/smurfs/"
+
+const App = ({ fetchSmurfsFrom }) => {
+  useEffect(() => {
+    fetchSmurfsFrom(API_ENDPOINT)
+  }, [])
+  return (
+    <main className="App">
+      <header>
         <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your Redux version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-      </div>
-    );
-  }
+      </header>
+      <nav />
+      <SmurfsList />
+      <SmurfForm />
+    </main>
+  )
 }
 
-export default App;
+export default connect(
+  null,
+  { fetchSmurfsFrom }
+)(App)
