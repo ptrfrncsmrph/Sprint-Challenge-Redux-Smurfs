@@ -19,7 +19,7 @@ const SmurfsList = ({ smurfs }) =>
     either(onFailure, smurfs => (
       <ul>
         {smurfs.map(smurf => (
-          <Smurf {...smurf} />
+          <Smurf key={smurf.id} {...smurf} />
         ))}
       </ul>
     ))
