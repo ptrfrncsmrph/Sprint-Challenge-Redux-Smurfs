@@ -3,16 +3,12 @@ import { connect } from "react-redux"
 
 import SmurfsList from "./SmurfsList"
 import SmurfForm from "./SmurfForm"
-import { fetchSmurfsFrom } from "../actionCreators"
+import { fetchSmurfs } from "../actionCreators"
 
 import "./App.css"
 
-const API_ENDPOINT = "http://10.0.0.53:3333/smurfs/"
-
-const App = ({ fetchSmurfsFrom }) => {
-  useEffect(() => {
-    fetchSmurfsFrom(API_ENDPOINT)
-  }, [])
+const App = ({ fetchSmurfs }) => {
+  useEffect(fetchSmurfs, [])
   return (
     <main className="App">
       <header>
@@ -27,5 +23,5 @@ const App = ({ fetchSmurfsFrom }) => {
 
 export default connect(
   null,
-  { fetchSmurfsFrom }
+  { fetchSmurfs }
 )(App)

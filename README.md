@@ -22,9 +22,19 @@ In this challenge, you are to build the Smurfs village once again, only this tim
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
-- [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
-- [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+- [x] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+
+  - **Actions** are JavaScript objects that describe the changes you want to make to your application state (attached to the `type` key of the object) along with the minimal amount of data needed to effect that change (typically attached to a `payload` key on the object).
+  - **Reducers** are functions that take an existing state and an action, and return a new application state based on that action. In a Redux app there is one single reducer (usually a composition of smaller reducers) that handles all updates to the application state.
+  - **Store** is where the state for the application lives. It also provides a `dispatch` method by which you can update the store state via actions, and a `subscribe` method for subscribing for changes to the store state. `react-redux` provides a Context `Provider` component that handles the store subscription for you.
+
+- [x] What is the difference between Application state and Component state? When would be a good time to use one over the other?
+
+  Application state is the global state of the application, which can be accessed or subscribed to by any component within the app (such as via the Context API). Component state is local to an indvidual component and is not immediately accessible to the other components in the app (though its easy to pass parent state to a child via props). It's generally a good idea to keep most state in the Application state layer, if components in the app need to know about and respond to changes to that state, but there are cases where the Application in general doesn't need to update on each local state change (such as user form input, before that form is submitted).
+
+- [x] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+  `redux-thunk` allows you to dispatch actions asynchronously. So you pass in a reference to the `dispatch` function and that will get called when a promise/future is resolved with data, for example. To use `redux-thunk` you have to define your asynchronous action creators so that they return a function that takes `dispatch` as an argument.
 
 ## Project Set Up
 
@@ -90,7 +100,7 @@ return dispatch => {
 
 ### POST '/smurfs'
 
-- [ ] Design the functionality to add a smurf to the Smurf DB you'll need all three fields. `name`, `age`, and `height`.
+- [x] Design the functionality to add a smurf to the Smurf DB you'll need all three fields. `name`, `age`, and `height`.
 
 Example of the shape of data to be sent to the `POST` endpoint:
 
@@ -102,7 +112,7 @@ Example of the shape of data to be sent to the `POST` endpoint:
 }
 ```
 
-- [ ] Double check to make sure that a smurf is created correctly once your functionality is built out.
+- [x] Double check to make sure that a smurf is created correctly once your functionality is built out.
 
 Initially Brainey will be in the array, but it takes more than one smurf to make the village. Be sure to add a few smurfs to populate our smurf village.
 

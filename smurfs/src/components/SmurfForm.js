@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import { connect } from "react-redux"
+import { addSmurf } from "../actionCreators"
 
 const emptySmurf = {
   name: "",
@@ -6,15 +8,20 @@ const emptySmurf = {
   height: ""
 }
 
-const SmurfForm = () => {
+const SmurfForm = ({ addSmurf }) => {
   const [{ name, age, height }, setSmurf] = useState(emptySmurf)
   const handleChange = ({ target: { name, value } }) => {
     setSmurf(smurf => ({ ...smurf, [name]: value }))
   }
+  const handleSubmit = e => {
+    e.preventDefault()
+    addSmurf({ name, age: Number(age), height })
+    setSmurf(emptySmurf)
+  }
   return (
     <>
       <h3>Add a smurf</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           name="name"
           type="text"
@@ -36,9 +43,13 @@ const SmurfForm = () => {
           onChange={handleChange}
           placeholder="Enter smurf height"
         />
+        <button>Submit</button>
       </form>
     </>
   )
 }
 
-export default SmurfForm
+export default connect(
+  null,
+  { addSmurf }
+)(SmurfForm)
